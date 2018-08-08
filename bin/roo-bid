@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+
+require('commander')
+  .version(require('../package').version)
+  .usage('<command> [options]')
+  .command('create', 'generate project')
+  .command('new', 'change config about nginx')
+  .parse(process.argv);
