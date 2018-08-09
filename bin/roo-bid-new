@@ -9,6 +9,7 @@ const ora=require('ora')
 const rm=require('rimraf').sync
 const checkVersion=require('../lib/check-version.js')
 const renderTemplateFiles=require('../lib/render-template-files')
+const transformIntoAbsolutePath=require('../lib/local-path').transformIntoAbsolutePath
 
 program
   .usage('<type[component,page]>')
@@ -56,7 +57,7 @@ function main(){
   }
   //生成page或者component
   const rooConfig=require(configPath)
-  const destination=program.dest
+  const defaultDestination=transformIntoAbsolutePath(program.dest)
   inquirer.prompt([{
     type:'list',
     name:'newName',
@@ -66,19 +67,19 @@ function main(){
     const {newName}=answer
     const operand=rooConfig.bid[`${newType}s`].find(item=>item.name==newName)
     if(Array.isArray(operand.prompts)){
-      inquirer.prompt(operand.prompts.concat(destination?[]:[{
+      inquirer.prompt(operand.prompts.concat({
         type:'input',
         name:'name',
         message:`Input the name of ${newType}`,
         defalut:operand.name
-      },{
+      },defaultDestination?[]:{
         type:'input',
         name:'destination',
         message:`Input the destination of ${newType}`,
         defalut:process.cwd()
-      }])).then(answer=>{
+      })).then(answer=>{
         const {destination,name}=answer
-        const finalDestination=path.join(path.isAbsolute(destination)?destination:path.join(process.cwd(),destination),name)
+        const finalDestination=path.join(destination?transformIntoAbsolutePath(destination):defaultDestination,name);
         const otherMetadata=answer;
         //判断生成目录下是否存在同名
         if(exists(finalDestination)){
