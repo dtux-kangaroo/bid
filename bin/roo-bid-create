@@ -9,7 +9,7 @@ const ora=require('ora')
 const rm = require('rimraf').sync
 const checkVersion=require('../lib/check-version.js')
 const fetchTemplateList=require('../lib/fetch-template-list')
-const generate=require('../lib/generate')
+const generate=require('../lib/generate-project')
 
 //检测版本并执行Main函数
 checkVersion(()=>{
@@ -37,10 +37,10 @@ function Main(){
       message:'Choose template you want'
     }]).then(answer=>{
       //模板名称
-      const templateName=answer.template
+      const tmpName=answer.template
       //远程模板地址
-      const templateUrl=templateList.find(template=>template.name===templateName).url
-      const tmpDest=path.resolve(tmpRepo,templateName)
+      const tmpUrl=templateList.find(template=>template.name===tmpName).url
+      const tmpDest=path.join(tmpRepo,tmpName)
       if(exists(tmpDest)){
         inquirer.prompt([
           {
@@ -51,25 +51,26 @@ function Main(){
         ]).then(answer=>{
           if(answer.override) {
             rm(tmpDest)
-            downloadAndGenerate(templateName,templateUrl)
+            downloadAndGenerate(tmpRepo,tmpName,tmpUrl)
           }else{
             generate(tmpDest)
           }
         });
       }else{
-        downloadAndGenerate(templateName,templateUrl)
+        downloadAndGenerate(tmpRepo,tmpName,tmpUrl)
       }  
     })
   })
 }
 /**
  * 
- * @param {String} templateName 
- * @param {String} templateUrl 
+ * @param {String} tmpRepo 
+ * @param {String} tmpName 
+ * @param {String} tmpUrl 
  */
-function downloadAndGenerate(templateName,templateUrl){
+function downloadAndGenerate(tmpRepo,tmpName,tmpUrl){
   const spinner=ora('downloading template...')
-  const tmpDest=path.resolve(tmpRepo,templateName)
+  const tmpDest=path.join(tmpRepo,tmpName)
   inquirer.prompt([{
     type:'input',
     name:'branch',
@@ -77,7 +78,7 @@ function downloadAndGenerate(templateName,templateUrl){
     default:'master'
   }]).then(answer=>{
     spinner.start()
-    download(`${templateUrl}#${answer.branch}`,tmpDest,{
+    download(`${tmpUrl}#${answer.branch}`,tmpDest,{
       clone:false
     },(err)=>{
       if(err){
