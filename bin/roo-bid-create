@@ -44,7 +44,7 @@ fetchTemplateList((templateList)=>{
           rm(tmpDest)
           downloadAndGenerate(templateName,templateUrl)
         }else{
-          generate()
+          generate(tmpDest)
         }
       });
     }else{
@@ -76,7 +76,7 @@ function downloadAndGenerate(templateName,templateUrl){
         console.log(err)
       }else{
         spinner.succeed(chalk.green('download template successfully'))
-        generate()
+        generate(tmpDest)
       }
     })
   })
