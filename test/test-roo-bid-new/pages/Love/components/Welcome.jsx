@@ -1,7 +1,8 @@
 import React from 'react'
 class Welcome extends React.PureComponent{
   render(){
-    return (<div>Hello GEM</div>)
+    const {name} = this.props;
+    return (<div>Hello {name}</div>)
   }
 }
 export default Welcome
