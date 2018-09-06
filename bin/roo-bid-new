@@ -58,60 +58,46 @@ function main(){
   //生成page或者component
   try{
     const rooConfig=require(configPath);
-    const defaultDestination=transformIntoAbsolutePath(program.dest)
+    const defaultDestination=rooConfig.bid[newType==='component'?'componentDest':'pageDest'];
     inquirer.prompt([{
       type:'list',
       name:'newName',
       choices:rooConfig.bid[`${newType}s`].map(item=>item.name),
-      message:'Choose one page you need'  
+      message:`Choose one ${newType} you need`  
     }]).then(answer=>{
       const {newName}=answer
       const operand=rooConfig.bid[`${newType}s`].find(item=>item.name==newName)
-      if(Array.isArray(operand.prompts)){
-        inquirer.prompt(operand.prompts.concat({
-          type:'input',
-          name:'name',
-          message:`Input the name of ${newType}`,
-          defalut:operand.name
-        },
-        // defaultDestination?[]:{
-        //   type:'input',
-        //   name:'destination',
-        //   message:`Input the destination of ${newType}`,
-        //   defalut:process.cwd()
-        // }
-      )).then(answer=>{
-          const {destination,name}=answer
-          //const finalDestination=path.join(destination?transformIntoAbsolutePath(destination):defaultDestination,name);
-          let configPath=path.join(newType=='page'?rooConfig.bid[`pagePath`]:rooConfig.bid[`comonpent`],name);
-          let setPath=path.join(defaultDestination||'',name);
-          const finalDestination=defaultDestination?setPath:configPath;
-          const otherMetadata=answer;
-          //判断生成目录下是否存在同名
-          if(exists(finalDestination)){
-            inquirer.prompt([{
-              type:'confirm',
-              name:'override',
-              message:`The ${newType} named ${name} exists!Override?`
-            }]).then(answer=>{
-              const {override} = answer
-              newPageOrComponent(operand.path,finalDestination,otherMetadata)
-              if(override){
-                rm(finalDestination)
-                newPageOrComponent(operand.path,finalDestination,otherMetadata)
-              }else{
-                process.exit()
-              }
-            })
-          }else{
-            newPageOrComponent(operand.path,finalDestination,otherMetadata)
-          }
-        })
-      }
+      inquirer.prompt([{
+        type:'input',
+        name:'name',
+        message:`Input the name of ${newType}`,
+        default:operand.name
+      }].concat(operand.prompts)).then(answer=>{
+        const otherMetadata=answer;
+        const finalDestination=path.join(program.dest?transformIntoAbsolutePath(program.dest):defaultDestination,otherMetadata.name);
+        //判断生成目录下是否存在同名
+        if(exists(finalDestination)){
+          inquirer.prompt([{
+            type:'confirm',
+            name:'override',
+            message:`The ${newType} named ${otherMetadata.name} exists!Override?`
+          }]).then(answer=>{
+            const {override} = answer
+            if(override){
+              rm(finalDestination)
+              newPageOrComponent(operand.path,finalDestination,otherMetadata);
+            }else{
+              process.exit();
+            }
+          })
+        }else{
+          newPageOrComponent(operand.path,finalDestination,otherMetadata);
+        }
+      })
     })
   }catch(e){
     let curPath=path.join(process.cwd(),'roo.config.js');
-    console.log(`${chalk.red(`Cannot find module ${curPath}, please create it;`)}`); return;
+    console.log(`${chalk.red(`Cannot find module ${curPath}, please create it \n or default path is error`)}`); return;
   }
 }
 /**

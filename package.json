@@ -1,6 +1,6 @@
 {
   "name": "roo-bid",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "main": "index.js",
   "description": "袋鼠云前端构建工具",
   "repository": "git@github.com:dtux-kangaroo/roo-bid.git",

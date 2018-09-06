@@ -1,10 +1,11 @@
 const path=require('path')
 module.exports={
   bid:{
+    pageDest:path.join(__dirname,'pages'),
     pages:[
       {
-        name:'love',
-        path:path.join(__dirname,'templates/pages/love'),
+        name:'Love',
+        path:path.join(__dirname,'templates/pages/Love'),
         prompts:[
           {
             type:'input',
@@ -14,10 +15,11 @@ module.exports={
         ]
       }
     ],
+    componentDest:path.join(__dirname,'components'),
     components:[
       {
-        name:'girl',
-        path:path.join(__dirname,'templates/components/girl'),
+        name:'Girl',
+        path:path.join(__dirname,'templates/components/Girl'),
         prompts:[
           {
             type:'input',
