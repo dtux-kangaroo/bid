@@ -73,7 +73,7 @@ function main(){
         default:operand.name
       }].concat(operand.prompts)).then(answer=>{
         const otherMetadata=answer;
-        const defaultDestination=operand.dest;
+        const defaultDestination=operand.dest||'';
         const finalDestination=path.join(program.dest?transformIntoAbsolutePath(program.dest):defaultDestination,otherMetadata.name);
         //判断生成目录下是否存在同名
         if(exists(finalDestination)){
