@@ -84,7 +84,6 @@ function main(){
           const {destination,name}=answer
           //const finalDestination=path.join(destination?transformIntoAbsolutePath(destination):defaultDestination,name);
           let configPath=path.join(newType=='page'?rooConfig.bid[`pagePath`]:rooConfig.bid[`comonpent`],name);
-           console.log(defaultDestination);
           let setPath=path.join(defaultDestination||'',name);
           const finalDestination=defaultDestination?setPath:configPath;
           const otherMetadata=answer;
