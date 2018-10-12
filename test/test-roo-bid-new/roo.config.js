@@ -1,33 +1,37 @@
 const path=require('path')
 module.exports={
   bid:{
-    pageDest:path.join(__dirname,'pages'),
-    pages:[
-      {
-        name:'Love',
-        path:path.join(__dirname,'templates/pages/Love'),
-        prompts:[
-          {
-            type:'input',
-            name:'love',
-            message:'your love girl'
-          }
-        ]
-      }
-    ],
-    componentDest:path.join(__dirname,'components'),
-    components:[
-      {
-        name:'Girl',
-        path:path.join(__dirname,'templates/components/Girl'),
-        prompts:[
-          {
-            type:'input',
-            name:'girl',
-            message:'your love girl'
-          }
-        ]
-      }
-    ]
+    page: {
+      output: path.join(__dirname,'pages'),
+      templates: [
+        {
+          name:'Love',
+          src:path.join(__dirname,'templates/pages/Love'),
+          prompts:[
+            {
+              type:'input',
+              name:'love',
+              message:'your love girl'
+            }
+          ]
+        }
+      ]
+    },
+    component: {
+      output: path.join(__dirname,'components'),
+      templates: [
+        {
+          name:'Girl',
+          src:path.join(__dirname,'templates/components/Girl'),
+          prompts:[
+            {
+              type:'input',
+              name:'girl',
+              message:'your love girl'
+            }
+          ]
+        }
+      ]
+    }
   }
 }

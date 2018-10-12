@@ -10,7 +10,6 @@ const rm = require('rimraf').sync
 const checkVersion=require('../lib/check-version.js')
 const fetchTemplateList=require('../lib/fetch-template-list')
 const generate=require('../lib/generate-project')
-
 //检测版本并执行Main函数
 checkVersion(()=>{
   Main()
