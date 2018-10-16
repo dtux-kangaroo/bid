@@ -15,10 +15,105 @@ npm install -g roo-bid
 6. 进入构建过程
 7. 构建完成，开始你的coding之旅
 
-#### roo-bid new
+### roo-bid new
 - -c或者--config 指定roo.config.js
 - -d或者--dest 指定模板生成路径
 ```
 roo-bid new page //新建一个页面
 roo-bid new component //新建一个组件
+```
+**roo.config.js配置示例：**
+```
+const path=require('path')
+module.exports={
+  bid:{
+    helpers:{
+      toLowercase:(str)=>str.toLocaleLowerCase()
+    },
+    page: {
+      output:path.join(__dirname,'src/pages'),
+      templates:[
+        {
+          name:'PageSample',
+          src:path.join(__dirname,'templates/pages/PageSample'),
+          prompts:[]
+        },
+        {
+          name:'PageReducer',
+          src:path.join(__dirname,'templates/pages/PageReducer'),
+          prompts:[]
+        }
+      ]
+    },
+    component:{
+      output:path.join(__dirname,'src/components'),
+      templates:[
+        {
+          name:'ComSample',
+          src:path.join(__dirname,'templates/components/ComSample'),
+          prompts:[
+            {
+              type:'input',
+              name:'content',
+              message:'the content of component'
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+
+```
+#### helpers
+通过helpers属性可以注册Handlebars的helpers。
+```
+module.exports = {
+  helpers: {
+    lowercase: str => str.toLowerCase()
+  }
+}
+```
+```
+{{ lowercase name }}
+```
+#### pages
+- output 页面生成目录
+- templates 可选择构建页面模板列表
+
+templates每一项配置：
+- name 模板名称
+- src 模板路径
+- prompts 构建页面时询问的问题列表,拿到的答案可用于后续的模板渲染，可参照 [inquirer](https://github.com/SBoudrias/Inquirer.js)
+
+
+#### component
+- output 组件生成目录
+- templates 可选择构建组件模板列表
+
+templates每一项配置：
+- name 模板名称
+- src 模板路径
+- prompts 构建页面时询问的问题列表，拿到的答案可用于后续的模板渲染，可参照 [inquirer](https://github.com/SBoudrias/Inquirer.js)
+
+
+**注：**
+templates每一项配置中的prompts使用示例：
+```
+{
+  templates:[
+    {
+      name:'PageSample',
+      src:path.join(__dirname,'templates/pages/PageSample'),
+      prompts:[{
+        type:'input',
+        name:'content',
+        message:'the content of component'
+      }]
+    }
+  ]
+}
+```
+```
+{{content}}
 ```
