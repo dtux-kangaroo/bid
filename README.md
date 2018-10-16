@@ -84,7 +84,7 @@ module.exports = {
 templates每一项配置：
 - name 模板名称
 - src 模板路径
-- prompts 构建页面时询问的问题列表,拿到的答案可用于后续的模板渲染，可参照 [inquirer](https://github.com/SBoudrias/Inquirer.js)
+- prompts 构建页面时询问的问题列表,拿到的答案可用于后续的模板渲染，可参照 [inquirer](https://github.com/SBoudrias/Inquirer.js)
 
 
 #### component
@@ -94,7 +94,7 @@ templates每一项配置：
 templates每一项配置：
 - name 模板名称
 - src 模板路径
-- prompts 构建页面时询问的问题列表，拿到的答案可用于后续的模板渲染，可参照 [inquirer](https://github.com/SBoudrias/Inquirer.js)
+- prompts 构建页面时询问的问题列表，拿到的答案可用于后续的模板渲染，可参照 [inquirer](https://github.com/SBoudrias/Inquirer.js)
 
 
 **注：**
