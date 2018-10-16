@@ -6,6 +6,9 @@ npm install -g roo-bid
 ```
 ## Usage
 ### roo-bid create
+
+![roo-bid构建流程图](https://pic2.zhimg.com/80/v2-ad900cbfd9554ab4fcc6e319d0941102_hd.jpg)
+
 构建流程：
 1. 拉取远程模板信息
 2. 选择需要的远程模板
@@ -14,6 +17,8 @@ npm install -g roo-bid
 5. 下载模板至本地模板库
 6. 进入构建过程
 7. 构建完成，开始你的coding之旅
+
+
 
 ### roo-bid new
 - -c或者--config 指定roo.config.js
@@ -77,7 +82,7 @@ module.exports = {
 ```
 {{ lowercase name }}
 ```
-#### pages
+#### pages
 - output 页面生成目录
 - templates 可选择构建页面模板列表
 
