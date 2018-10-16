@@ -1,6 +1,11 @@
 const path=require('path')
 module.exports={
   bid:{
+    helpers:{
+      toLowercase:function(name) {
+        return name.toLocaleLowerCase();
+      }
+    },
     page: {
       output: path.join(__dirname,'pages'),
       templates: [
