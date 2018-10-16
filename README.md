@@ -1,5 +1,5 @@
 # roo-bid 
-袋鼠云项目构建工具
+袋鼠云Web项目构建工具
 ## Install
 ```
 npm install -g roo-bid 
