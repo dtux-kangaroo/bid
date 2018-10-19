@@ -33,7 +33,7 @@ function Main(){
       type:'list',
       name:'template',
       choices,
-      message:'Choose template you want'
+      message:'Choose one template you want'
     }]).then(answer=>{
       //模板名称
       const tmpName=answer.template
