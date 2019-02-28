@@ -113,12 +113,6 @@ brace-expansion@^1.1.7:
     balanced-match "^1.0.0"
     concat-map "0.0.1"
 
-bracket-template@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/bracket-template/-/bracket-template-1.1.5.tgz#3ee17a715560f735f66a44579f08e980e8463a1d"
-  dependencies:
-    js-yaml "^3.7.0"
-
 buffer-alloc-unsafe@^1.1.0:
   version "1.1.0"
   resolved "http://registry.npm.taobao.org/buffer-alloc-unsafe/download/buffer-alloc-unsafe-1.1.0.tgz#bd7dc26ae2972d0eda253be061dba992349c19f0"
@@ -730,7 +724,7 @@ isurl@^1.0.0-alpha5:
     has-to-string-tag-x "^1.2.0"
     is-object "^1.0.1"
 
-js-yaml@^3.7.0, js-yaml@^3.8.1:
+js-yaml@^3.8.1:
   version "3.12.0"
   resolved "http://registry.npm.taobao.org/js-yaml/download/js-yaml-3.12.0.tgz#eaed656ec8344f10f527c6bfa1b6e2244de167d1"
   dependencies:
